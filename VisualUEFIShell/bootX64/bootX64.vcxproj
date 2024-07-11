@@ -50,7 +50,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -75,6 +75,7 @@
     <GenerateManifest>false</GenerateManifest>
     <TargetExt>.efi</TargetExt>
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -133,6 +134,8 @@
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
       <UseFullPaths>false</UseFullPaths>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <SubSystem>EFI Application</SubSystem>
@@ -140,10 +143,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
-      <EntryPointSymbol>_cdeCRT0UefiShellDrvEDK</EntryPointSymbol>
+      <EntryPointSymbol>UefiMain</EntryPointSymbol>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention>false</DataExecutionPrevention>
-      <AdditionalDependencies>$(SolutionDir)lib\toroC64.lib;BaseLib.lib;UefiApplicationEntryPoint.lib;BaseDebugLibNull.lib;UefiBootServicesTableLib.lib;DevicePathLib.lib;UefiRuntimeServicesTableLib.lib;UefiLib.lib;UefiHiiServicesLib.lib;DxeHobLib.lib;DxeServicesTableLib.lib;UefiShellLib.lib;UefiHandleParsingLib.lib;UefiShellCommandLib.lib;UefiShellLevel2CommandsLib.lib;UefiShellLevel1CommandsLib.lib;UefiShellLevel3CommandsLib.lib;UefiShellDriver1CommandsLib.lib;UefiShellInstall1CommandsLib.lib;UefiShellDebug1CommandsLib.lib;UefiShellNetwork1CommandsLib.lib;UefiShellNetwork2CommandsLib.lib;UefiShellAcpiViewCommandLib.lib;BaseMemoryLib.lib;UefiMemoryAllocationLib.lib;BasePrintLib.lib;UefiFileHandleLib.lib;UefiHiiLib.lib;UefiSortLib.lib;BasePeCoffGetEntryPointLib.lib;BaseOrderedCollectionRedBlackTreeLib.lib;UefiShellBcfgCommandLib.lib;BaseIoLibIntrinsic.lib;DxeNetLib.lib;UefiBootManagerLib.lib;FilterLibNull.lib;DxeServicesLib.lib;BaseReportStatusCodeLibNull.lib;BasePerformanceLibNull.lib;VariablePolicyHelperLib.lib</AdditionalDependencies>
+      <AdditionalDependencies>BaseLib.lib;UefiApplicationEntryPoint.lib;BaseDebugLibNull.lib;UefiBootServicesTableLib.lib;DevicePathLib.lib;UefiRuntimeServicesTableLib.lib;UefiLib.lib;UefiHiiServicesLib.lib;DxeHobLib.lib;DxeServicesTableLib.lib;UefiShellLib.lib;UefiHandleParsingLib.lib;UefiShellCommandLib.lib;UefiShellLevel2CommandsLib.lib;UefiShellLevel1CommandsLib.lib;UefiShellLevel3CommandsLib.lib;UefiShellDriver1CommandsLib.lib;UefiShellInstall1CommandsLib.lib;UefiShellDebug1CommandsLib.lib;UefiShellNetwork1CommandsLib.lib;UefiShellNetwork2CommandsLib.lib;UefiShellAcpiViewCommandLib.lib;BaseMemoryLib.lib;UefiMemoryAllocationLib.lib;BasePrintLib.lib;UefiFileHandleLib.lib;UefiHiiLib.lib;UefiSortLib.lib;BasePeCoffGetEntryPointLib.lib;BaseOrderedCollectionRedBlackTreeLib.lib;UefiShellBcfgCommandLib.lib;BaseIoLibIntrinsic.lib;DxeNetLib.lib;UefiBootManagerLib.lib;FilterLibNull.lib;DxeServicesLib.lib;BaseReportStatusCodeLibNull.lib;BasePerformanceLibNull.lib;VariablePolicyHelperLib.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
@@ -167,29 +170,14 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\EDK2\ShellPkg\Application\Shell\ShellEnvVar.c" />
     <ClCompile Include="..\..\EDK2\ShellPkg\Application\Shell\ShellManParser.c" />
     <ClCompile Include="..\..\EDK2\ShellPkg\Application\Shell\ShellParametersProtocol.c" />
     <ClCompile Include="..\..\EDK2\ShellPkg\Application\Shell\ShellProtocol.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
-    </ClCompile>
-    <ClCompile Include="Shell.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</DeploymentContent>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\EDK2\ShellPkg\Application\Shell;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UefiMain=UefiMainCDEHOOKED;_NO_CRT_STDIO_INLINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <ClCompile Include="ShellProtocol.c">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\EDK2\ShellPkg\Application\Shell;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

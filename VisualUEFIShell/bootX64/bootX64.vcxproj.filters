@@ -39,12 +39,6 @@
     <ClCompile Include="..\..\EDK2\ShellPkg\Application\Shell\Shell.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Shell.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ShellProtocol.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\EDK2\ShellPkg\Application\Shell\ShellProtocol.c">
       <Filter>Source Files</Filter>
     </ClCompile>
